@@ -5,12 +5,13 @@ import (
 	_ "embed"
 	"encoding/json"
 	"fmt"
-	"github.com/disintegration/imaging"
-	"github.com/fogleman/gg"
-	"github.com/golang/freetype/truetype"
 	"image"
 	"strings"
 	"time"
+
+	"github.com/disintegration/imaging"
+	"github.com/fogleman/gg"
+	"github.com/golang/freetype/truetype"
 )
 
 const size = 512
@@ -141,14 +142,6 @@ func buildEmojiFilename(sequence []rune) string {
 	return "emoji_" + filename + ".png"
 }
 
-func renderLine(dc *gg.Context, text string, x float64, y float64) {
-
-}
-
-func renderText(dc *gg.Context, text string, x float64, y float64) {
-
-}
-
 //go:embed data/sequences.json
 var sequencesJsonData []byte
 
@@ -169,7 +162,6 @@ func isSkinToneModifier(char rune) bool {
 }
 
 func main() {
-
 	// Load all the valid [emoji - modifier] pairs (e.g. "u1f1e6 u1f1e8" -> "flag for United States"))
 	if err := json.Unmarshal(sequencesJsonData, &validModifiers); err != nil {
 		panic(err)
@@ -263,10 +255,10 @@ func main() {
 			emojiIndex++
 
 			// draw debug line
-			dc.DrawLine(x-MWidth, y-MWidth/2, x, y+MWidth/2)
-			dc.SetLineWidth(1)
-			//dc.SetRGB(0, 0, 1)
-			dc.Stroke()
+			// dc.DrawLine(x-MWidth, y-MWidth/2, x, y+MWidth/2)
+			// dc.SetLineWidth(1)
+			// dc.SetRGB(0, 0, 1)
+			// dc.Stroke()
 
 		} else {
 			if char == 65039 || char == 65038 { // ufe0f, ufe0e; Variant selectors (ignore)
@@ -279,9 +271,9 @@ func main() {
 	}
 
 	// Draw debug underline
-	dc.SetRGB(1, 0, 0)
-	dc.DrawLine(startX, y, x, y)
-	dc.Stroke()
+	// dc.SetRGB(1, 0, 0)
+	// dc.DrawLine(startX, y, x, y)
+	// dc.Stroke()
 
 	fmt.Println("Done in", time.Since(startTime))
 
